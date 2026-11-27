@@ -1,13 +1,18 @@
 // src/App.jsx
-import React, { useState } from "react";import Navbar from "./components/Navbar";
+import React, { useState } from "react";
+import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import CoursesPage from "./pages/CoursesPage";
+import Home from "./pages/Home";
+import StudentsCarousel from "./pages/StudentsCarousel";
+import Cards from "./pages/Cards";
 import PlacementTestModal from "./components/PlacementTestModal";
 import CourseDetailsModal from "./components/CourseDetailsModal";
 import CheckoutModal from "./components/CheckoutModal";
-import { CATALOG_ITEMS } from "./data/CatalogeData"; // أو ./data/catalogData إذا عدّلتِ اسمه
+import { CATALOG_ITEMS } from "./data/CatalogeData"; // تأكدي من مطابقة اسم الملف: CatalogeData.js أو catalogData.js
+
 export default function App() {
-  const [activePage, setActivePage] = useState("courses"); // "home" | "about" | "courses"
+  const [activePage, setActivePage] = useState("home"); // "home" | "about" | "courses"
   const [quizOpen, setQuizOpen] = useState(false);
   const [detailsItem, setDetailsItem] = useState(null);
   const [checkoutItem, setCheckoutItem] = useState(null);
@@ -39,21 +44,10 @@ export default function App() {
         )}
 
         {activePage === "home" && (
-          <div className="pt-32 pb-16 max-w-4xl mx-auto px-4 text-center space-y-4">
-            <span className="inline-block bg-[#596683]/15 text-[#596683] text-xs font-bold px-4 py-1.5 rounded-full">
-              صفحة Home (جاهزة لدمج صفحة زميلك)
-            </span>
-            <h1 className="text-3xl font-extrabold">أهلاً بك في Bee Academy</h1>
-            <p className="text-slate-600 text-sm sm:text-base">
-              تم ربط زر Home في الناف بار بهذه الصفحة؛ يمكنك استبدال هذا المكون بصفحة Home الخاصة بزميلك فور جاهزيتها.
-            </p>
-            <button
-              type="button"
-              onClick={() => setActivePage("courses")}
-              className="bg-[#F47B35] hover:bg-[#e06a26] text-white font-bold px-6 py-3 rounded-xl cursor-pointer"
-            >
-              الانتقال إلى صفحة الكورسات
-            </button>
+          <div>
+            <Home />
+            <Cards />
+            <StudentsCarousel />
           </div>
         )}
 
