@@ -1,97 +1,194 @@
-import React, { useState } from 'react';
-import logo from '../assets/logo/Logo.png';
+// import React, { useState } from 'react';
+// import logo from '../assets/logo/Logo.png';
+
+// export default function Navbar() {
+//   const [active, setActive] = useState('Home');
+//   const [menuOpen, setMenuOpen] = useState(false);
+
+//   const menu = [
+//     { href: '#home', title: 'Home', icon: 'fa-house' },
+//     { href: '#about', title: 'About', icon: 'fa-user ' },
+//     { href: '#courses', title: 'Courses', icon: ' fa-layer-group ' },
+//     { href: '#contact', title: 'Contact', icon: 'fa-paper-plane' },
+//   ];
+
+//   return (
+//     <header className="fixed inset-x-0 top-5 z-50 px-6">
+//       <nav className="mx-auto flex max-w-[1100px] items-center justify-between rounded-full border border-white/25  px-5 py-2 shadow-lg backdrop-blur-md">
+//         {/* اللوجو */}
+//         <a href="#home" className="flex items-center">
+//           <img
+//             src={logo}
+//             alt="Bee Academy Logo"
+//             className="h-9 w-auto rounded-lg  px-2.5 py-0.5 object-contain"
+//           />
+//         </a>
+
+//         {/* روابط الشاشات المتوسطة والكبيرة */}
+//         <div className="hidden items-center gap-2 md:flex">
+//           {menu.map(({ href, title, icon }) => {
+//             const isActive = active === title;
+//             return (
+//               <a
+//                 key={title}
+//                 href={href}
+//                 onClick={() => setActive(title)}
+//                 className={`group flex items-center gap-2 rounded-full px-4 py-2 text-sm font-medium transition-all duration-300 hover:-translate-y-0.5 hover:bg-white/15 hover:text-white ${
+//                   isActive ? 'bg-white/20 text-white' : 'text-white/85'
+//                 }`}
+//               >
+//                 <i
+//                   className={`fa-solid ${icon} text-[0.85rem] transition-opacity group-hover:text-[#E47B25] group-hover:opacity-100 ${
+//                     isActive ? 'text-[#E47B25] opacity-100' : 'opacity-75'
+//                   }`}
+//                 />
+//                 <span>{title}</span>
+//               </a>
+//             );
+//           })}
+//         </div>
+
+//         {/* زر Login + زر قائمة الموبايل */}
+//         <div className="flex items-center gap-2">
+//           <a
+//             href="#contact"
+//             className="rounded-full bg-[#E47B25] px-5 py-2 text-sm font-semibold text-white shadow-[0_4px_15px_rgba(228,123,37,0.35)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#f08935]"
+//           >
+//             Login
+//           </a>
+
+//           <button
+//             type="button"
+//             onClick={() => setMenuOpen((prev) => !prev)}
+//             aria-label="القائمة"
+//             className="flex h-9 w-9 cursor-pointer items-center justify-center rounded-full border border-white/25 bg-white/10 text-white transition hover:bg-white/20 md:hidden"
+//           >
+//             <i className={`fa-solid ${menuOpen ? 'fa-xmark' : 'fa-bars'} text-sm`} />
+//           </button>
+//         </div>
+//       </nav>
+
+//       {/* القائمة المنسدلة للموبايل */}
+//       {menuOpen && (
+//         <div className="mx-auto mt-3 flex max-w-[1100px] flex-col gap-2 rounded-3xl border border-white/25 bg-slate-900/75 p-4 shadow-xl backdrop-blur-lg md:hidden">
+//           {menu.map(({ href, title, icon }) => {
+//             const isActive = active === title;
+//             return (
+//               <a
+//                 key={title}
+//                 href={href}
+//                 onClick={() => {
+//                   setActive(title);
+//                   setMenuOpen(false);
+//                 }}
+//                 className={`flex items-center gap-3 rounded-2xl px-4 py-3 text-sm font-medium transition ${
+//                   isActive
+//                     ? 'bg-[#E47B25] text-white'
+//                     : 'text-white/85 hover:bg-white/10 hover:text-white'
+//                 }`}
+//               >
+//                 <i className={`fa-solid ${icon} text-sm`} />
+//                 <span>{title}</span>
+//               </a>
+//             );
+//           })}
+//         </div>
+//       )}
+//     </header>
+//   );
+// }
+
+import React, { useState, useEffect } from "react";
+import { Link} from "react-router-dom";
+import logo from "../assets/logo/Logo.png";
+
+const menu = [
+  { to: "/", title: "Home", icon: "fa-house" },
+  { to: "/about", title: "About", icon: "fa-user" },
+  { to: "/courses", title: "Courses", icon: "fa-layer-group" },
+  { to: "/contact", title: "Contact", icon: "fa-paper-plane" },
+];
 
 export default function Navbar() {
-  const [active, setActive] = useState('Home');
+  const { pathname } = useLocation();
   const [menuOpen, setMenuOpen] = useState(false);
 
-  const menu = [
-    { href: '#home', title: 'Home', icon: 'fa-house' },
-    { href: '#about', title: 'About', icon: 'fa-layer-group' },
-    { href: '#courses', title: 'Courses', icon: 'fa-user' },
-    { href: '#contact', title: 'Contact', icon: 'fa-paper-plane' },
-  ];
+  useEffect(() => {
+    setMenuOpen(false);
+  }, [pathname]);
+
+  const isActive = (to) =>
+    to === "/" ? pathname === "/" || pathname === "/home" : pathname === to;
 
   return (
     <header className="fixed inset-x-0 top-5 z-50 px-6">
-      <nav className="mx-auto flex max-w-[1100px] items-center justify-between rounded-full border border-white/25  px-5 py-2 shadow-lg backdrop-blur-md">
-        {/* اللوجو */}
-        <a href="#home" className="flex items-center">
+      <nav className="mx-auto flex max-w-[1100px] items-center justify-between rounded-full border border-white/40 bg-white/10 px-5 py-2 shadow-sm backdrop-blur-md">
+        <Link to="/" className="flex items-center">
           <img
             src={logo}
             alt="Bee Academy Logo"
-            className="h-9 w-auto rounded-lg  px-2.5 py-0.5 object-contain"
+            className="h-9 w-auto rounded-lg px-2.5 py-0.5 object-contain"
           />
-        </a>
+        </Link>
 
-        {/* روابط الشاشات المتوسطة والكبيرة */}
         <div className="hidden items-center gap-2 md:flex">
-          {menu.map(({ href, title, icon }) => {
-            const isActive = active === title;
+          {menu.map(({ to, title, icon }) => {
+            const active = isActive(to);
             return (
-              <a
-                key={title}
-                href={href}
-                onClick={() => setActive(title)}
-                className={`group flex items-center gap-2 rounded-full px-4 py-2 text-sm font-medium transition-all duration-300 hover:-translate-y-0.5 hover:bg-white/15 hover:text-white ${
-                  isActive ? 'bg-white/20 text-white' : 'text-white/85'
+              <Link
+                key={to}
+                to={to}
+                className={`group flex items-center gap-2 rounded-full px-4 py-2 text-sm font-medium text-[#2b3447] transition-all duration-300 hover:-translate-y-0.5 hover:bg-black/10 ${
+                  active ? "bg-white/40" : ""
                 }`}
               >
                 <i
                   className={`fa-solid ${icon} text-[0.85rem] transition-opacity group-hover:text-[#E47B25] group-hover:opacity-100 ${
-                    isActive ? 'text-[#E47B25] opacity-100' : 'opacity-75'
+                    active ? "text-[#E47B25] opacity-100" : "opacity-75"
                   }`}
                 />
                 <span>{title}</span>
-              </a>
+              </Link>
             );
           })}
         </div>
 
-        {/* زر Login + زر قائمة الموبايل */}
         <div className="flex items-center gap-2">
-          <a
-            href="#contact"
+          <Link
+            to="/contact"
             className="rounded-full bg-[#E47B25] px-5 py-2 text-sm font-semibold text-white shadow-[0_4px_15px_rgba(228,123,37,0.35)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#f08935]"
           >
             Login
-          </a>
+          </Link>
 
           <button
             type="button"
-            onClick={() => setMenuOpen((prev) => !prev)}
+            onClick={() => setMenuOpen((p) => !p)}
             aria-label="القائمة"
-            className="flex h-9 w-9 cursor-pointer items-center justify-center rounded-full border border-white/25 bg-white/10 text-white transition hover:bg-white/20 md:hidden"
+            aria-expanded={menuOpen}
+            className="flex h-9 w-9 items-center justify-center rounded-full border border-[#2b3447]/30 bg-[#2b3447]/10 text-[#2b3447] transition hover:bg-[#2b3447]/20 md:hidden"
           >
-            <i className={`fa-solid ${menuOpen ? 'fa-xmark' : 'fa-bars'} text-sm`} />
+            <i className={`fa-solid ${menuOpen ? "fa-xmark" : "fa-bars"} text-sm`} />
           </button>
         </div>
       </nav>
 
-      {/* القائمة المنسدلة للموبايل */}
       {menuOpen && (
-        <div className="mx-auto mt-3 flex max-w-[1100px] flex-col gap-2 rounded-3xl border border-white/25 bg-slate-900/75 p-4 shadow-xl backdrop-blur-lg md:hidden">
-          {menu.map(({ href, title, icon }) => {
-            const isActive = active === title;
-            return (
-              <a
-                key={title}
-                href={href}
-                onClick={() => {
-                  setActive(title);
-                  setMenuOpen(false);
-                }}
-                className={`flex items-center gap-3 rounded-2xl px-4 py-3 text-sm font-medium transition ${
-                  isActive
-                    ? 'bg-[#E47B25] text-white'
-                    : 'text-white/85 hover:bg-white/10 hover:text-white'
-                }`}
-              >
-                <i className={`fa-solid ${icon} text-sm`} />
-                <span>{title}</span>
-              </a>
-            );
-          })}
+        <div className="mx-auto mt-3 flex max-w-[1100px] flex-col gap-2 rounded-3xl border border-white/40 bg-white/60 p-4 shadow-xl backdrop-blur-lg md:hidden">
+          {menu.map(({ to, title, icon }) => (
+            <Link
+              key={to}
+              to={to}
+              className={`flex items-center gap-3 rounded-2xl px-4 py-3 text-sm font-medium transition ${
+                isActive(to)
+                  ? "bg-[#E47B25] text-white"
+                  : "text-[#2b3447] hover:bg-black/10"
+              }`}
+            >
+              <i className={`fa-solid ${icon} text-sm`} />
+              <span>{title}</span>
+            </Link>
+          ))}
         </div>
       )}
     </header>

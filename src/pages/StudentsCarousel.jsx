@@ -1,7 +1,5 @@
 import { useEffect, useRef, useState } from "react";
 
-
-
 const modules = import.meta.glob("../assets/Students/*.jpg", {
   eager: true,
   import: "default",
@@ -20,18 +18,18 @@ const students = [
   { name: "فريق Bee Academy", role: "student-3.jpg" },
   { name: "فريق Bee Academy", role: "student-4.jpg" },
   { name: "فريق Bee Academy", role: "student-5.jpg" },
-  { name: "  فريقBee Academy", role:"student-6.jpg" },
+  { name: "  فريقBee Academy", role: "student-6.jpg" },
   { name: "فريق Bee Academy", role: "student-7.jpg" },
   { name: "  فريقBee Academy", role: "student-8.jpg" },
   { name: "  فريقBee Academy", role: "student-9.jpg" },
   { name: "فريق Bee Academy", role: "student-10.jpg" },
-  { name: "فريق Bee Academy", role:"student-11.jpg" },
+  { name: "فريق Bee Academy", role: "student-11.jpg" },
 ];
 
 export default function StudentsCarousel() {
   const total = photos.length;
   const [current, setCurrent] = useState(0);
-  const [shown, setShown] = useState(0); 
+  const [shown, setShown] = useState(0);
   const [paused, setPaused] = useState(false);
   const touchStart = useRef(0);
 
@@ -48,13 +46,11 @@ export default function StudentsCarousel() {
     return "pos-hidden";
   };
 
-  // fade للاسم والوصف
   useEffect(() => {
     const t = setTimeout(() => setShown(current), 300);
     return () => clearTimeout(t);
   }, [current]);
 
-  // أسهم الكيبورد
   useEffect(() => {
     const onKey = (e) => {
       if (e.key === "ArrowLeft") setCurrent((c) => (c - 1 + total) % total);
@@ -64,7 +60,6 @@ export default function StudentsCarousel() {
     return () => document.removeEventListener("keydown", onKey);
   }, [total]);
 
-  // تشغيل تلقائي (يقف عند وضع الماوس)
   useEffect(() => {
     if (paused) return;
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
@@ -90,7 +85,11 @@ export default function StudentsCarousel() {
       <h2 className="sc-title">أبطالنا</h2>
 
       <div className="sc-container" dir="ltr">
-        <button className="sc-arrow left" aria-label="السابق" onClick={() => go(current - 1)}>
+        <button
+          className="sc-arrow left"
+          aria-label="السابق"
+          onClick={() => go(current - 1)}
+        >
           ‹
         </button>
 
@@ -101,12 +100,20 @@ export default function StudentsCarousel() {
               className={`sc-card ${getPosition(i)}`}
               onClick={() => go(i)}
             >
-              <img src={src} alt={`طالب من Bee Academy ${i + 1}`} draggable={false} />
+              <img
+                src={src}
+                alt={`طالب من Bee Academy ${i + 1}`}
+                draggable={false}
+              />
             </div>
           ))}
         </div>
 
-        <button className="sc-arrow right" aria-label="التالي" onClick={() => go(current + 1)}>
+        <button
+          className="sc-arrow right"
+          aria-label="التالي"
+          onClick={() => go(current + 1)}
+        >
           ›
         </button>
       </div>

@@ -1,5 +1,9 @@
 @import "tailwindcss";
 
+html {
+  scroll-behavior: smooth;
+}
+
 /* ───────────── شريط المهارات المتحرك ───────────── */
 .skills-marquee-wrapper {
   position: relative;

@@ -21,11 +21,11 @@ export default function Footer() {
   return (
     <footer
       dir="rtl"
-      className="w-full bg-gradient-to-b from-[#0b466b] to-[#072f49] text-slate-200"
+      className="w-full bg-gradient-to-b from-[##596683] to-[#596683] text-slate-200"
     >
       <div className="mx-auto max-w-6xl px-4 pt-14 pb-10 sm:px-6">
         <div className="grid grid-cols-1 gap-10 md:grid-cols-2 lg:grid-cols-4">
-          {/* الشعار ونبذة عن الأكاديمية */}
+    
           <div className="space-y-4">
             <div className="inline-flex items-center rounded-2xl  px-3.5 py-2 shadow-md">
               <img
@@ -41,7 +41,7 @@ export default function Footer() {
             </p>
           </div>
 
-          {/* روابط سريعة */}
+     
           <div>
             <h4 className="mb-4 text-base font-bold text-white">
               روابط سريعة
@@ -61,7 +61,7 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* المسارات التدريبية */}
+      
           <div>
             <h4 className="mb-4 text-base font-bold text-white">
               المسارات التدريبية
@@ -76,7 +76,7 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* تواصل معنا */}
+       
           <div>
             <h4 className="mb-4 text-base font-bold text-white">تواصل معنا</h4>
             <div className="space-y-3 text-sm text-slate-300">
@@ -90,7 +90,7 @@ export default function Footer() {
                 <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-white/10 text-sky-300">
                   📞
                 </span>
-                <span dir="ltr">+20 100 000 0000</span>
+                <span dir="ltr">+20 1031903279</span>
               </p>
               <p className="flex items-center gap-2.5">
                 <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-white/10 text-sky-300">
@@ -100,7 +100,7 @@ export default function Footer() {
               </p>
             </div>
 
-            {/* أيقونات التواصل الاجتماعي */}
+           
             <div className="mt-5 flex items-center gap-2.5">
               {[
                 { name: "Facebook", label: "FB", href: "#" },
@@ -121,7 +121,6 @@ export default function Footer() {
           </div>
         </div>
 
-        {/* الشريط السفلي */}
         <div className="mt-12 flex flex-col items-center justify-between gap-3 border-t border-white/15 pt-6 text-xs text-slate-300 sm:flex-row">
           <p>© {currentYear} Bee Academy. جميع الحقوق محفوظة.</p>
           
