@@ -8,7 +8,11 @@
   }
 
   body {
-    @apply bg-[#F8FAFC] text-[#1E293B] antialiased overflow-x-hidden;
+    background-color: #f8fafc;
+    color: #1e293b;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
 }
 
@@ -81,8 +85,12 @@
 }
 
 @keyframes scrollSkills {
-  0% { transform: translateX(0); }
-  100% { transform: translateX(-50%); }
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
 }
 
 /* ───────────── كاروسيل الطلاب (Bee Academy) ───────────── */
@@ -159,20 +167,46 @@
   transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
-.sc-card.pos-center { z-index: 10; transform: scale(1.1) translateZ(0); }
-.sc-card.pos-center img { filter: none; }
+.sc-card.pos-center {
+  z-index: 10;
+  transform: scale(1.1) translateZ(0);
+}
+.sc-card.pos-center img {
+  filter: none;
+}
 
-.sc-card.pos-l2 { z-index: 1; transform: translateX(-400px) scale(0.8) translateZ(-300px); opacity: 0.7; }
-.sc-card.pos-l1 { z-index: 5; transform: translateX(-200px) scale(0.9) translateZ(-100px); opacity: 0.9; }
-.sc-card.pos-r1 { z-index: 5; transform: translateX(200px) scale(0.9) translateZ(-100px); opacity: 0.9; }
-.sc-card.pos-r2 { z-index: 1; transform: translateX(400px) scale(0.8) translateZ(-300px); opacity: 0.7; }
+.sc-card.pos-l2 {
+  z-index: 1;
+  transform: translateX(-400px) scale(0.8) translateZ(-300px);
+  opacity: 0.7;
+}
+.sc-card.pos-l1 {
+  z-index: 5;
+  transform: translateX(-200px) scale(0.9) translateZ(-100px);
+  opacity: 0.9;
+}
+.sc-card.pos-r1 {
+  z-index: 5;
+  transform: translateX(200px) scale(0.9) translateZ(-100px);
+  opacity: 0.9;
+}
+.sc-card.pos-r2 {
+  z-index: 1;
+  transform: translateX(400px) scale(0.8) translateZ(-300px);
+  opacity: 0.7;
+}
 
 .sc-card.pos-l2 img,
 .sc-card.pos-l1 img,
 .sc-card.pos-r1 img,
-.sc-card.pos-r2 img { filter: grayscale(100%); }
+.sc-card.pos-r2 img {
+  filter: grayscale(100%);
+}
 
-.sc-card.pos-hidden { opacity: 0; pointer-events: none; }
+.sc-card.pos-hidden {
+  opacity: 0;
+  pointer-events: none;
+}
 
 .sc-info {
   text-align: center;
@@ -200,8 +234,12 @@
   background: var(--sc-purple);
 }
 
-.sc-name::before { left: -120px; }
-.sc-name::after { right: -120px; }
+.sc-name::before {
+  left: -120px;
+}
+.sc-name::after {
+  right: -120px;
+}
 
 .sc-role {
   color: var(--sc-gray);
@@ -254,20 +292,53 @@
   padding-bottom: 4px;
 }
 
-.sc-arrow:hover { background: rgba(0, 0, 0, 0.8); transform: translateY(-50%) scale(1.1); }
-.sc-arrow:focus-visible { outline: 2px solid #f5bd35; outline-offset: 2px; }
-.sc-arrow.left { left: 20px; }
-.sc-arrow.right { right: 20px; }
+.sc-arrow:hover {
+  background: rgba(0, 0, 0, 0.8);
+  transform: translateY(-50%) scale(1.1);
+}
+.sc-arrow:focus-visible {
+  outline: 2px solid #f5bd35;
+  outline-offset: 2px;
+}
+.sc-arrow.left {
+  left: 20px;
+}
+.sc-arrow.right {
+  right: 20px;
+}
 
 @media (max-width: 768px) {
-  .sc-title { font-size: 4.5rem; top: 100px; }
-  .sc-container { height: 340px; }
-  .sc-card { width: 200px; height: 280px; }
-  .sc-card.pos-l2 { transform: translateX(-250px) scale(0.8) translateZ(-300px); }
-  .sc-card.pos-l1 { transform: translateX(-120px) scale(0.9) translateZ(-100px); }
-  .sc-card.pos-r1 { transform: translateX(120px) scale(0.9) translateZ(-100px); }
-  .sc-card.pos-r2 { transform: translateX(250px) scale(0.8) translateZ(-300px); }
-  .sc-name { font-size: 2rem; }
-  .sc-role { font-size: 1.1rem; }
-  .sc-name::before, .sc-name::after { display: none; }
+  .sc-title {
+    font-size: 4.5rem;
+    top: 100px;
+  }
+  .sc-container {
+    height: 340px;
+  }
+  .sc-card {
+    width: 200px;
+    height: 280px;
+  }
+  .sc-card.pos-l2 {
+    transform: translateX(-250px) scale(0.8) translateZ(-300px);
+  }
+  .sc-card.pos-l1 {
+    transform: translateX(-120px) scale(0.9) translateZ(-100px);
+  }
+  .sc-card.pos-r1 {
+    transform: translateX(120px) scale(0.9) translateZ(-100px);
+  }
+  .sc-card.pos-r2 {
+    transform: translateX(250px) scale(0.8) translateZ(-300px);
+  }
+  .sc-name {
+    font-size: 2rem;
+  }
+  .sc-role {
+    font-size: 1.1rem;
+  }
+  .sc-name::before,
+  .sc-name::after {
+    display: none;
+  }
 }

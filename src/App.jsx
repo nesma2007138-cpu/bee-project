@@ -1,22 +1,49 @@
-// src/App.jsx
 import React, { useState } from "react";
+import { Routes, Route, useNavigate, useLocation } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import CoursesPage from "./pages/CoursesPage";
 import Home from "./pages/Home";
 import StudentsCarousel from "./pages/StudentsCarousel";
 import Cards from "./pages/Cards";
+import AboutUs from "./pages/AboutUs";
 import PlacementTestModal from "./components/PlacementTestModal";
 import CourseDetailsModal from "./components/CourseDetailsModal";
 import CheckoutModal from "./components/CheckoutModal";
-import { CATALOG_ITEMS } from "./data/CatalogeData"; // تأكدي من مطابقة اسم الملف: CatalogeData.js أو catalogData.js
+import { CATALOG_ITEMS } from "./data/CatalogeData";
+import ScrollToTop from "./components/ScrollToTop";
+
+function HomePage({ onOpenPlacementQuiz, onNavigate }) {
+  return (
+    <>
+      <Home onOpenPlacementQuiz={onOpenPlacementQuiz} onNavigate={onNavigate} />
+      <Cards />
+      <StudentsCarousel onOpenPlacementQuiz={onOpenPlacementQuiz} />
+    </>
+  );
+}
 
 export default function App() {
-  const [activePage, setActivePage] = useState("home"); // "home" | "about" | "courses"
+  const navigate = useNavigate();
+  const location = useLocation();
+
   const [quizOpen, setQuizOpen] = useState(false);
   const [detailsItem, setDetailsItem] = useState(null);
   const [checkoutItem, setCheckoutItem] = useState(null);
   const [loginModalOpen, setLoginModalOpen] = useState(false);
+
+  const activePage =
+    location.pathname === "/courses"
+      ? "courses"
+      : location.pathname === "/about"
+      ? "about"
+      : "home";
+
+  const handleNavigate = (page) => {
+    if (page === "courses") navigate("/courses");
+    else if (page === "about") navigate("/about");
+    else navigate("/");
+  };
 
   const handleEnrollRecommended = (recommendedTrackTitle) => {
     const matched =
@@ -30,48 +57,40 @@ export default function App() {
     <div className="min-h-screen flex flex-col bg-[#F8FAFC] text-[#1E293B]">
       <Navbar
         activePage={activePage}
-        onNavigate={setActivePage}
+        onNavigate={handleNavigate}
         onOpenLogin={() => setLoginModalOpen(true)}
       />
 
       <div className="flex-1">
-        {activePage === "courses" && (
-          <CoursesPage
-            onOpenPlacementQuiz={() => setQuizOpen(true)}
-            onSelectItemDetails={(item) => setDetailsItem(item)}
-            onSelectItemSubscribe={(item) => setCheckoutItem(item)}
+        <ScrollToTop />
+        <Routes>
+          <Route
+            path="/"
+            element={
+              <HomePage
+                onOpenPlacementQuiz={() => setQuizOpen(true)}
+                onNavigate={handleNavigate}
+              />
+            }
           />
-        )}
-
-        {activePage === "home" && (
-          <div>
-            <Home />
-            <Cards />
-            <StudentsCarousel />
-          </div>
-        )}
-
-        {activePage === "about" && (
-          <div className="pt-32 pb-16 max-w-4xl mx-auto px-4 text-center space-y-4">
-            <span className="inline-block bg-[#F47B35]/15 text-[#F47B35] text-xs font-bold px-4 py-1.5 rounded-full">
-              صفحة About
-            </span>
-            <h1 className="text-3xl font-extrabold">عن Bee Academy</h1>
-            <p className="text-slate-600 text-sm sm:text-base leading-relaxed">
-              نستهدف الطلاب من سن 8 إلى 13 سنة في الأقصر وقنا وأونلاين لتنمية مهارات التفكير المنطقي، البرمجة، والروبوتات.
-            </p>
-            <button
-              type="button"
-              onClick={() => setActivePage("courses")}
-              className="bg-[#596683] hover:bg-[#49556e] text-white font-bold px-6 py-3 rounded-xl cursor-pointer"
-            >
-              استعراض الكورسات
-            </button>
-          </div>
-        )}
+          <Route
+            path="/courses"
+            element={
+              <CoursesPage
+                onOpenPlacementQuiz={() => setQuizOpen(true)}
+                onSelectItemDetails={(item) => setDetailsItem(item)}
+                onSelectItemSubscribe={(item) => setCheckoutItem(item)}
+              />
+            }
+          />
+          <Route
+            path="/about"
+            element={<AboutUs onOpenPlacementQuiz={() => setQuizOpen(true)} />}
+          />
+        </Routes>
       </div>
 
-      <Footer onNavigate={setActivePage} />
+      <Footer onNavigate={handleNavigate} />
 
       {/* النوافذ التفاعلية */}
       <PlacementTestModal

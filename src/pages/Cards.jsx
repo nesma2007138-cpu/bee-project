@@ -132,9 +132,7 @@ export default function Cards() {
         <h2 className="mb-2 text-2xl font-extrabold text-slate-900 sm:text-4xl">
           لحظات المسابقات والبطولات
         </h2>
-        <p className="text-sm text-slate-500 sm:text-base">
-          اضغط على أي بطاقة لعرض الصورة بالحجم الكامل
-        </p>
+       
       </div>
 
       <div className="mx-auto grid max-w-6xl grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
