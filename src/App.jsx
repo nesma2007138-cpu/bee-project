@@ -7,6 +7,7 @@ import Home from "./pages/Home";
 import StudentsCarousel from "./pages/StudentsCarousel";
 import Cards from "./pages/Cards";
 import AboutUs from "./pages/AboutUs";
+import NotFound from "./pages/NotFound"; // عدّلي المسار لو حطيتيه في components
 import PlacementTestModal from "./components/PlacementTestModal";
 import CourseDetailsModal from "./components/CourseDetailsModal";
 import CheckoutModal from "./components/CheckoutModal";
@@ -33,11 +34,13 @@ export default function App() {
   const [loginModalOpen, setLoginModalOpen] = useState(false);
 
   const activePage =
-    location.pathname === "/courses"
+    location.pathname === "/"
+      ? "home"
+      : location.pathname === "/courses"
       ? "courses"
       : location.pathname === "/about"
       ? "about"
-      : "home";
+      : null;
 
   const handleNavigate = (page) => {
     if (page === "courses") navigate("/courses");
@@ -73,6 +76,7 @@ export default function App() {
               />
             }
           />
+
           <Route
             path="/courses"
             element={
@@ -83,9 +87,15 @@ export default function App() {
               />
             }
           />
+
           <Route
             path="/about"
             element={<AboutUs onOpenPlacementQuiz={() => setQuizOpen(true)} />}
+          />
+
+          <Route
+            path="*"
+            element={<NotFound onNavigate={handleNavigate} />}
           />
         </Routes>
       </div>

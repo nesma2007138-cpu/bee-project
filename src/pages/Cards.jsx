@@ -18,7 +18,7 @@ const competitionCards = [
     accent: "#0b466b",
   },
   {
-    id: 2,
+    id: 2, 
     image: comp2,
     title: "Galactic Team Members",
     tag: "Certificates & Awards",

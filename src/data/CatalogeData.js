@@ -5,7 +5,7 @@ export const CATALOG_ITEMS = [
     section: "tracks",
     title: "المسار التأسيسي (Foundation Path)",
     badge: "المسارات • 3 أشهر",
-    age: "8 – 13 سنة",
+    
     priceLabel: "1,600 جنيه (باقة 3 أشهر)",
     subPrice: "أو 600 ج لأول شهر و700 ج للشهور التالية",
     system: "حصة أسبوعية (ساعتان) + متابعة فردية لكل طالب",
@@ -27,7 +27,7 @@ export const CATALOG_ITEMS = [
     section: "tracks",
     title: "مسار السوفت وير المتقدم (Software Path)",
     badge: "المسارات • مسار تخصصي",
-    age: "8 – 13 سنة",
+    
     priceLabel: "800 جنيه / شهرياً",
     subPrice: "حصة أسبوعية (ساعتان)",
     system: "تطبيقات عملية ومشاريع برمجية متدرجة",
@@ -49,7 +49,7 @@ export const CATALOG_ITEMS = [
     section: "tracks",
     title: "مسار الهارد وير والروبوتات (Hardware & Robotics)",
     badge: "المسارات • مسار تخصصي",
-    age: "8 – 13 سنة",
+    
     priceLabel: "800 جنيه / شهرياً (التراك الأول)",
     subPrice: "متاح خيارات تجهيز/أدوات حسب النظام المعتمد",
     system: "حصة أسبوعية (ساعتان) + تجارب عملية",
@@ -73,7 +73,7 @@ export const CATALOG_ITEMS = [
     section: "courses",
     title: "كورس ما قبل البرمجة (Pre-Coding)",
     badge: "الكورسات • تأسيس مبكر",
-    age: "8 – 13 سنة (مناسب للمبتدئين)",
+   
     priceLabel: "500 جنيه / شهرياً",
     subPrice: "حصة أسبوعية (ساعتان)",
     system: "أنشطة تفاعلية وألعاب ذهنية ومنطقية",
@@ -95,7 +95,7 @@ export const CATALOG_ITEMS = [
     section: "courses",
     title: "كورس منهج ICT والمهارات الرقمية",
     badge: "الكورسات • دعم دراسي وتقني",
-    age: "8 – 13 سنة",
+   
     priceLabel: "1,000 جنيه للطالب",
     subPrice: "مجموعات صغيرة أو متابعة خاصة",
     system: "شرح تطبيقي + تدريبات على الأسئلة والمهارات",
@@ -117,7 +117,7 @@ export const CATALOG_ITEMS = [
     section: "courses",
     title: "كورس الذكاء الاصطناعي للمبدعين الصغار",
     badge: "الكورسات • مهارات المستقبل",
-    age: "8 – 13 سنة",
+   
     priceLabel: "650 جنيه / شهرياً",
     subPrice: "حصة أسبوعية (ساعتان)",
     system: "تطبيقات عملية وآمنة للطلاب",
@@ -141,7 +141,7 @@ export const CATALOG_ITEMS = [
     section: "workshops",
     title: "ورشة / معسكر المنزل الذكي (Smart Home)",
     badge: "الورش • معسكر عملي",
-    age: "8 – 13 سنة",
+    
     priceLabel: "500 جنيه للفرد",
     subPrice: "ورشة مكثفة تطبيقية",
     system: "تصميم وبناء وبرمجة نموذج منزل ذكي",

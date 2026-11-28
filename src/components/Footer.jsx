@@ -8,23 +8,22 @@ export default function Footer({ onNavigate }) {
       className="bg-[#596683] text-white pt-14 pb-8 mt-16 border-t border-white/10 overflow-visible"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 text-sm">
-        {/* تعريف الأكاديمية + اللوجو متحرك شمال شوية */}
+        {/* تعريف الأكاديمية + اللوجو محاذي مع بداية السطور من اليمين */}
         <div className="space-y-4 overflow-visible">
           <button
             type="button"
             onClick={() => onNavigate("courses")}
-            className="flex items-center gap-4 text-right cursor-pointer border-0 bg-transparent p-0 focus:outline-none overflow-visible -translate-x-3 md:-translate-x-4 transition-transform"
+            className="flex items-center justify-start gap-4 text-right cursor-pointer border-0 bg-transparent p-0 focus:outline-none overflow-visible transition-transform"
           >
             <img
               src={logo}
               alt="Bee Academy Logo"
-              className="h-12 md:h-14 w-auto max-w-none object-contain border-0 shrink-0 scale-250 mx-2 origin-center transition-transform"
+              className="h-12 md:h-14 w-auto max-w-none object-contain border-0 shrink-0 scale-300 origin-right transition-transform"
             />
-          
           </button>
 
           <p className="text-white/80 leading-relaxed text-xs sm:text-sm">
-            نُعد الطلاب من سن <strong>8 إلى 13 سنة</strong> في مجالات البرمجة، الذكاء الاصطناعي، والروبوتات بأسلوب تطبيقي شيق.
+            اكادمية متخصصة في تعليم الاطفال والمراهقين البرمجة والذكاء الاصطناعي والروبوتات ,من خلال تجارب تعليمية عملية ومشروعات ابداعية .
           </p>
           <p className="text-xs text-[#f5bd35] font-semibold">
             العنوان: مصر — الأقصر / قنا • متاح أونلاين

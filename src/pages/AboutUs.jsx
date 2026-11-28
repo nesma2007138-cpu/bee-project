@@ -359,7 +359,7 @@ export default function AboutUs({ onOpenPlacementQuiz }) {
         className="overflow-hidden bg-[#F5BD35] font-['Alexandria',sans-serif] text-[#596683]"
       >
         <section className="relative px-5 pb-20 pt-36 md:pt-44">
-          <div className="pointer-events-none absolute -top-20 start-[-6rem] h-72 w-72 rounded-full bg-[#F47B35] blur-3xl" />
+          <div className="pointer-events-none absolute -top-20 start-[-6rem] h-72 w-72 rounded-full bg-[#F5BD35] blur-3xl" />
           <div className="pointer-events-none absolute bottom-0 end-[-5rem] h-72 w-72 rounded-full bg-[#7957C8]/20 blur-3xl" />
 
           <div className="relative mx-auto grid max-w-6xl items-center gap-12 md:grid-cols-2">
@@ -375,7 +375,7 @@ export default function AboutUs({ onOpenPlacementQuiz }) {
                 className="mt-5 text-4xl font-extrabold md:text-5xl"
               >
                 نحوّل الطفل من مستخدم للتكنولوجيا إلى{" "}
-                <span className="text-[#5966C9]">صانع</span> لها
+                <span className="text-white">صانع</span> لها
               </h1>
               <p
                 data-hero-text
@@ -388,13 +388,13 @@ export default function AboutUs({ onOpenPlacementQuiz }) {
               <div data-hero-text className="mt-8 flex flex-wrap gap-3">
                 <a
                   href={Whatsapp}
-                  className="rounded-full bg-[#596683] px-7 py-3 font-bold text-orange-500 shadow-lg shadow-[#F47B35]/30 transition hover:-translate-y-0.5 hover:bg-[#F1EBFA]"
+                  className="rounded-full bg-[#596683] px-7 py-3 font-bold text-[#F5BD35] shadow-lg shadow-[#F47B35]/30 transition hover:-translate-y-0.5 hover:bg-[#F1EBFA]"
                 >
                   تواصل معنا على واتساب
                 </a>
                 <a
                   href="#faq"
-                  className="rounded-full bg-[#596683] px-7 py-3 font-bold text-orange-500 ring-1 ring-[#596683]/20 transition hover:bg-[#F1EBFA]"
+                  className="rounded-full bg-[#596683] px-7 py-3 font-bold text-[#F5BD35] ring-1 ring-[#596683]/20 transition hover:bg-[#F1EBFA]"
                 >
                   الأسئلة الشائعة
                 </a>
@@ -464,7 +464,7 @@ export default function AboutUs({ onOpenPlacementQuiz }) {
                 data-story-img
                 src={img}
                 alt="مؤسس Bee Academy"
-                className="h-auto w-full max-w-md justify-self-center rounded-[2rem] object-cover shadow-xl ring-4 ring-white"
+                className="h-auto w-full max-w-md justify-self-center rounded-[2rem] object-cover shadow-xl ring-4 border-[#F5BD35]"
               />
             </div>
           </div>
@@ -475,7 +475,7 @@ export default function AboutUs({ onOpenPlacementQuiz }) {
             data-vision-grid
             className="mx-auto grid max-w-6xl gap-6 md:grid-cols-2"
           >
-            <div data-vision-card className="rounded-[2rem] bg-[#EAF3FC] p-8">
+            <div data-vision-card className="rounded-[2rem]  bg-[#EAF3FC] p-8">
               <div className="text-4xl">🔭</div>
               <h3 className="mt-4 text-2xl font-extrabold text-[#596683]">
                 رؤيتنا
@@ -485,7 +485,7 @@ export default function AboutUs({ onOpenPlacementQuiz }) {
                 فيه، لا مجرد شاشة يستخدمها.
               </p>
             </div>
-            <div data-vision-card className="rounded-[2rem] bg-[#FFF5D9] p-8">
+            <div data-vision-card className="rounded-[2rem]  bg-[#FFF5D9] p-8">
               <div className="text-4xl">🎯</div>
               <h3 className="mt-4 text-2xl font-extrabold text-[#b98507]">
                 رسالتنا
@@ -511,7 +511,7 @@ export default function AboutUs({ onOpenPlacementQuiz }) {
                 <div
                   data-goal-card
                   key={goal.title}
-                  className="group rounded-3xl border border-[#16A6A0]/15 bg-[#FBFFFE] p-8 transition-transform duration-200 hover:-translate-y-1 hover:shadow-lg"
+                  className="group rounded-3xl border border-[#F5BD35] bg-[#FBFFFE] p-8 transition-transform duration-200 hover:-translate-y-1 hover:shadow-lg"
                 >
                   <span className="grid h-14 w-14 place-items-center rounded-2xl bg-[#E4F6F3] text-2xl transition-transform duration-200 group-hover:scale-110">
                     {goal.icon}
@@ -540,10 +540,10 @@ export default function AboutUs({ onOpenPlacementQuiz }) {
                 <div
                   key={value.t}
                   data-value-card
-                  className="rounded-3xl p-6 text-center transition-transform duration-200 hover:-translate-y-1"
+                  className="rounded-3xl p-6 text-center transition-transform border-3 border-[#596683] duration-200 hover:-translate-y-1"
                   style={{ background: value.bg }}
                 >
-                  <div className="text-4xl">{value.icon}</div>
+                  <div className="text-4xl ">{value.icon}</div>
                   <h3 className="mt-3 font-bold text-[#596683]">{value.t}</h3>
                   <div
                     className="mx-auto mt-3 h-1 w-10 rounded-full"
@@ -557,7 +557,7 @@ export default function AboutUs({ onOpenPlacementQuiz }) {
 
         {/* ───── فريق التدريب ───── */}
         <section className="bg-[#596683] px-5 py-20 text-white">
-          <div className="mx-auto max-w-6xl">
+          <div className="mx-auto max-w-6xl ">
             <SectionHead title="المدربون" />
             <div
               data-team-grid
@@ -567,7 +567,7 @@ export default function AboutUs({ onOpenPlacementQuiz }) {
                 <div
                   key={m.name}
                   data-team-card
-                  className="rounded-3xl bg-[#FBFAFF] p-6 text-center ring-1 ring-black/5"
+                  className="rounded-3xl bg-[#FBFAFF] p-6 text-center ring-1 ring-black/5 border-3 border-[#F5BD35] transition-transform duration-200 hover:-translate-y-1"
                 >
                   <div
                     className="mx-auto grid h-20 w-20 place-items-center rounded-full text-3xl font-extrabold text-white"

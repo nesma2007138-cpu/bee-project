@@ -5,10 +5,10 @@ export default function Navbar({ activePage, onNavigate, onOpenLogin }) {
   const [menuOpen, setMenuOpen] = useState(false);
 
   const navLinks = [
-    { id: "home", label: "Home" },
-    { id: "about", label: "About" },
-    { id: "courses", label: "Courses" },
-    { id: "contact", label: "Contact", isFooterScroll: true },
+    { id: "home", label: "الرئيسية" },
+    { id: "courses", label: "الكورسات" },
+    { id: "about", label: "من نحن" },
+    { id: "contact", label: "تواصل معنا", isFooterScroll: true },
   ];
 
   const handleLinkClick = (link) => {
@@ -25,23 +25,28 @@ export default function Navbar({ activePage, onNavigate, onOpenLogin }) {
 
   return (
     <header className="fixed top-0 inset-x-0 z-50 px-4 py-3">
-      <div className="max-w-7xl mx-auto rounded-full bg-white/15 backdrop-blur-md border border-white/25 px-4 md:px-6 py-2 flex items-center justify-between shadow-lg">
-        {/* شعار Bee Academy بدون border */}
+      <div
+        dir="ltr"
+        className="max-w-7xl mx-auto rounded-full bg-white/15 backdrop-blur-md border border-white/25 px-4 md:px-6 py-2 flex items-center justify-between shadow-lg"
+      >
+        {/* شعار Bee Academy على الشمال */}
         <button
           type="button"
           onClick={() => onNavigate("courses")}
-          className="flex items-center gap-2.5 text-right cursor-pointer border-0 bg-transparent p-0 focus:outline-none"
+          className="flex items-center gap-2.5 text-left cursor-pointer border-0 bg-transparent p-0 focus:outline-none"
         >
           <img
             src={logo}
-            alt="Bee Academy Logo"
-            className="h-12 md:h-14 w-auto object-contain border-0 shrink-0 scale-160 origin-center transition-transform"
+            alt="شعار Bee Academy"
+            className="h-12 md:h-14 w-auto object-contain border-0 shrink-0 scale-200 origin-left transition-transform"
           />
-         
         </button>
 
         {/* روابط التنقل - سطح المكتب */}
-        <nav className="hidden md:flex items-center gap-6 text-sm font-semibold text-white">
+        <nav
+          dir="rtl"
+          className="hidden md:flex items-center gap-6 text-sm font-semibold text-white"
+        >
           {navLinks.map((link) => {
             const isActive = activePage === link.id && !link.isFooterScroll;
             return (
@@ -61,14 +66,14 @@ export default function Navbar({ activePage, onNavigate, onOpenLogin }) {
           })}
         </nav>
 
-        {/* زر Login وقائمة الموبايل */}
-        <div className="flex items-center gap-2">
+        {/* زر تسجيل الدخول وقائمة الموبايل على اليمين */}
+        <div dir="rtl" className="flex items-center gap-2">
           <button
             type="button"
             onClick={onOpenLogin}
             className="bg-[#F5BD35] hover:bg-[#df6926] text-white text-xs md:text-sm font-bold px-5 py-2 rounded-full transition cursor-pointer shadow"
           >
-            Login
+            تسجيل الدخول
           </button>
 
           <button
@@ -84,7 +89,10 @@ export default function Navbar({ activePage, onNavigate, onOpenLogin }) {
 
       {/* قائمة الموبايل */}
       {menuOpen && (
-        <div className="md:hidden mt-2 max-w-7xl mx-auto rounded-2xl bg-[#1E293B]/95 backdrop-blur-lg border border-white/15 p-4 flex flex-col gap-2 text-white text-sm font-semibold">
+        <div
+          dir="rtl"
+          className="md:hidden mt-2 max-w-7xl mx-auto rounded-2xl bg-[#1E293B]/95 backdrop-blur-lg border border-white/15 p-4 flex flex-col gap-2 text-white text-sm font-semibold"
+        >
           {navLinks.map((link) => (
             <button
               key={link.id}
