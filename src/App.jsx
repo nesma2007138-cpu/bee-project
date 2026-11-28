@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Routes, Route, useNavigate, useLocation } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
@@ -7,19 +7,31 @@ import Home from "./pages/Home";
 import StudentsCarousel from "./pages/StudentsCarousel";
 import Cards from "./pages/Cards";
 import AboutUs from "./pages/AboutUs";
-import NotFound from "./pages/NotFound"; // عدّلي المسار لو حطيتيه في components
+import NotFound from "./pages/NotFound";
 import PlacementTestModal from "./components/PlacementTestModal";
 import CourseDetailsModal from "./components/CourseDetailsModal";
 import CheckoutModal from "./components/CheckoutModal";
 import { CATALOG_ITEMS } from "./data/CatalogeData";
 import ScrollToTop from "./components/ScrollToTop";
+import RevealOnScroll from "./components/RevealOnScroll";
 
 function HomePage({ onOpenPlacementQuiz, onNavigate }) {
   return (
     <>
-      <Home onOpenPlacementQuiz={onOpenPlacementQuiz} onNavigate={onNavigate} />
-      <Cards />
-      <StudentsCarousel onOpenPlacementQuiz={onOpenPlacementQuiz} />
+      <RevealOnScroll y={16}>
+        <Home
+          onOpenPlacementQuiz={onOpenPlacementQuiz}
+          onNavigate={onNavigate}
+        />
+      </RevealOnScroll>
+
+      <RevealOnScroll y={24} delay={0.05}>
+        <Cards />
+      </RevealOnScroll>
+
+      <RevealOnScroll y={24} delay={0.05}>
+        <StudentsCarousel onOpenPlacementQuiz={onOpenPlacementQuiz} />
+      </RevealOnScroll>
     </>
   );
 }
@@ -32,6 +44,15 @@ export default function App() {
   const [detailsItem, setDetailsItem] = useState(null);
   const [checkoutItem, setCheckoutItem] = useState(null);
   const [loginModalOpen, setLoginModalOpen] = useState(false);
+
+  useEffect(() => {
+    const html = document.documentElement;
+    const prevBehavior = html.style.scrollBehavior;
+    html.style.scrollBehavior = "smooth";
+    return () => {
+      html.style.scrollBehavior = prevBehavior;
+    };
+  }, []);
 
   const activePage =
     location.pathname === "/"
@@ -80,17 +101,23 @@ export default function App() {
           <Route
             path="/courses"
             element={
-              <CoursesPage
-                onOpenPlacementQuiz={() => setQuizOpen(true)}
-                onSelectItemDetails={(item) => setDetailsItem(item)}
-                onSelectItemSubscribe={(item) => setCheckoutItem(item)}
-              />
+              <RevealOnScroll y={18}>
+                <CoursesPage
+                  onOpenPlacementQuiz={() => setQuizOpen(true)}
+                  onSelectItemDetails={(item) => setDetailsItem(item)}
+                  onSelectItemSubscribe={(item) => setCheckoutItem(item)}
+                />
+              </RevealOnScroll>
             }
           />
 
           <Route
             path="/about"
-            element={<AboutUs onOpenPlacementQuiz={() => setQuizOpen(true)} />}
+            element={
+              <RevealOnScroll y={18}>
+                <AboutUs onOpenPlacementQuiz={() => setQuizOpen(true)} />
+              </RevealOnScroll>
+            }
           />
 
           <Route

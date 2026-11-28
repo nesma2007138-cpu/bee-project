@@ -1,77 +1,81 @@
 // src/pages/CoursesPage.jsx
-import React, { useState } from "react";
+import React from "react";
 import HeroSection from "../components/Herosection"; // أو "../components/HeroSection" إذا عدّلتِ اسم الملف
 import { CATALOG_ITEMS } from "../data/CatalogeData"; // أو "../data/catalogData"
+import RevealOnScroll from "../components/RevealOnScroll";
 
 function SectionCards({ title, subtitle, items, onMoreDetails, onSubscribe }) {
   return (
     <div className="mb-14">
-      <div className="mb-6">
+      <RevealOnScroll y={18} className="mb-6">
         <h2 className="text-2xl sm:text-3xl font-extrabold text-[#1E293B]">
           {title}
         </h2>
         {subtitle && (
           <p className="text-sm text-slate-600 mt-1">{subtitle}</p>
         )}
-      </div>
+      </RevealOnScroll>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {items.map((item) => (
-          <div
+        {items.map((item, idx) => (
+          <RevealOnScroll
             key={item.id}
-            className="bg-white rounded-2xl border border-slate-200 shadow-sm hover:shadow-md transition p-5 flex flex-col justify-between"
+            delay={Math.min(idx * 0.05, 0.3)}
+            y={22}
           >
-            <div>
-              <div className="flex items-center justify-between gap-2 mb-3">
-                <span
-                  className={`text-xs font-bold px-3 py-1 rounded-full ${item.accentBg} ${item.accentText}`}
-                >
-                  {item.badge}
-                </span>
-                <span className="text-xs font-semibold text-slate-500">
-                  {item.age}
-                </span>
-              </div>
-
-              <h3 className="text-lg font-extrabold text-[#1E293B] mb-2">
-                {item.title}
-              </h3>
-
-              <p className="text-sm text-slate-600 leading-relaxed mb-4">
-                {item.shortDesc}
-              </p>
-            </div>
-
-            <div className="pt-4 border-t border-slate-100">
-              <div className="mb-4">
-                <div className="text-base font-extrabold text-[#F5BD35]">
-                  {item.priceLabel}
+            <div className="h-full bg-white rounded-2xl border border-slate-200 shadow-sm hover:shadow-md transition p-5 flex flex-col justify-between">
+              <div>
+                <div className="flex items-center justify-between gap-2 mb-3">
+                  <span
+                    className={`text-xs font-bold px-3 py-1 rounded-full ${item.accentBg} ${item.accentText}`}
+                  >
+                    {item.badge}
+                  </span>
+                  <span className="text-xs font-semibold text-slate-500">
+                    {item.age}
+                  </span>
                 </div>
-                {item.subPrice && (
-                  <div className="text-xs text-slate-500 mt-0.5">
-                    {item.subPrice}
-                  </div>
-                )}
+
+                <h3 className="text-lg font-extrabold text-[#1E293B] mb-2">
+                  {item.title}
+                </h3>
+
+                <p className="text-sm text-slate-600 leading-relaxed mb-4">
+                  {item.shortDesc}
+                </p>
               </div>
 
-              <div className="flex items-center gap-2.5">
-                <button
-                  type="button"
-                  onClick={() => onMoreDetails(item)}
-                  className="flex-1 border border-[#596683] text-[#596683] hover:bg-[#596683] hover:text-white font-bold text-xs sm:text-sm py-2.5 px-3 rounded-xl transition cursor-pointer"
-                >
-                  اعرف المزيد
-                </button>
-                <button
-                  type="button"
-                  onClick={() => onSubscribe(item)}
-                  className="flex-1 bg-[#F5BD35] hover:bg-[#df6926] text-white font-bold text-xs sm:text-sm py-2.5 px-3 rounded-xl transition cursor-pointer"
-                >
-                  اشترك الآن
-                </button>
+              <div className="pt-4 border-t border-slate-100">
+                <div className="mb-4">
+                  <div className="text-base font-extrabold text-[#F5BD35]">
+                    {item.priceLabel}
+                  </div>
+                  {item.subPrice && (
+                    <div className="text-xs text-slate-500 mt-0.5">
+                      {item.subPrice}
+                    </div>
+                  )}
+                </div>
+
+                <div className="flex items-center gap-2.5">
+                  <button
+                    type="button"
+                    onClick={() => onMoreDetails(item)}
+                    className="flex-1 border border-[#596683] text-[#596683] hover:bg-[#596683] hover:text-white font-bold text-xs sm:text-sm py-2.5 px-3 rounded-xl transition cursor-pointer"
+                  >
+                    اعرف المزيد
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => onSubscribe(item)}
+                    className="flex-1 bg-[#F5BD35] hover:bg-[#df6926] text-white font-bold text-xs sm:text-sm py-2.5 px-3 rounded-xl transition cursor-pointer"
+                  >
+                    اشترك الآن
+                  </button>
+                </div>
               </div>
             </div>
-          </div>
+          </RevealOnScroll>
         ))}
       </div>
     </div>
@@ -89,37 +93,44 @@ export default function CoursesPage({
 
   return (
     <div>
-      <HeroSection onStartQuiz={onOpenPlacementQuiz} />
+      <RevealOnScroll y={16}>
+        <HeroSection onStartQuiz={onOpenPlacementQuiz} />
+      </RevealOnScroll>
 
-      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-10">
+      <main
+        id="courses-catalog"
+        className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-10"
+      >
         {/* قسم اختبر نفسك */}
-        <div className="bg-white border border-slate-200 rounded-2xl p-6 sm:p-8 shadow-sm mb-14 flex flex-col md:flex-row items-center justify-between gap-6">
-          <div className="space-y-1.5 text-center md:text-right">
-            <span className="text-xs font-bold text-[#F5BD35] uppercase">
-              تقييم ذكي من 3 مستويات
-            </span>
-            <h2 className="text-xl sm:text-2xl font-extrabold text-[#1E293B]">
-              مش متأكد تبدأ من فين؟ اختبر نفسك وحدد مستواك
-            </h2>
-            <p className="text-sm text-slate-600">
-              املأ بيانات الطالب وابدأ الاختبار المتدرج (سهل • متوسط • صعب) لترشيح المسار المناسب.
-            </p>
-          </div>
+        <RevealOnScroll y={20}>
+          <div className="bg-white border border-slate-200 rounded-2xl p-6 sm:p-8 shadow-sm mb-14 flex flex-col md:flex-row items-center justify-between gap-6">
+            <div className="space-y-1.5 text-center md:text-right">
+              <span className="text-xs font-bold text-[#F5BD35] uppercase">
+                تقييم ذكي من 3 مستويات
+              </span>
+              <h2 className="text-xl sm:text-2xl font-extrabold text-[#1E293B]">
+                مش متأكد تبدأ من فين؟ اختبر نفسك وحدد مستواك
+              </h2>
+              <p className="text-sm text-slate-600">
+                املأ بيانات الطالب وابدأ الاختبار المتدرج (سهل • متوسط • صعب) لترشيح المسار المناسب.
+              </p>
+            </div>
 
-          <button
-            type="button"
-            onClick={onOpenPlacementQuiz}
-            className="w-full md:w-auto bg-[#F5BD35] hover:bg-[#df6926] text-white font-extrabold text-base px-8 py-4 rounded-2xl shadow-md transition cursor-pointer shrink-0"
-          >
-            اختبر نفسك
-          </button>
-        </div>
+            <button
+              type="button"
+              onClick={onOpenPlacementQuiz}
+              className="w-full md:w-auto bg-[#F5BD35] hover:bg-[#df6926] text-white font-extrabold text-base px-8 py-4 rounded-2xl shadow-md transition cursor-pointer shrink-0"
+            >
+              اختبر نفسك
+            </button>
+          </div>
+        </RevealOnScroll>
 
         {/* المسارات */}
         <section id="tracks-section">
           <SectionCards
             title="المسارات"
-            subtitle="برامج تدريبية متدرجة لبناء المهارات التقنية والبرمجية للطلاب من 8 إلى 13 سنة"
+            subtitle="برامج تدريبية متدرجة لبناء المهارات التقنية والبرمجية للطلاب من 5 إلى 18 سنة"
             items={tracks}
             onMoreDetails={onSelectItemDetails}
             onSubscribe={onSelectItemSubscribe}

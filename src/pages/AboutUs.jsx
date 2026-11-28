@@ -3,8 +3,7 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
 import img from "../assets/About/BeeAczdemy.jpg";
-import about1 from "../assets/files/about-1.jpg";
-import about2 from "../assets/files/about-2.jpg";
+import thevideo from "../assets/thevideo.mp4"; // عدّلي الامتداد أو المسار إذا لزم
 
 gsap.registerPlugin(ScrollTrigger, useGSAP);
 
@@ -92,7 +91,30 @@ const faqs = [
   },
 ];
 
-function SectionHead({ tag, title, tint, color }) {
+function WaveDivider({ fill = "#FFFFFF", flip = false }) {
+  return (
+    <div
+      className={`pointer-events-none absolute -bottom-px inset-x-0 z-20 leading-none ${
+        flip ? "scale-x-[-1]" : ""
+      }`}
+    >
+      <svg
+        viewBox="0 0 1440 70"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+        className="block w-full h-8 sm:h-12"
+        preserveAspectRatio="none"
+      >
+        <path
+          d="M0 30C320 75 640 -15 960 30C1200 63 1360 45 1440 30V70H0V30Z"
+          fill={fill}
+        />
+      </svg>
+    </div>
+  );
+}
+
+function SectionHead({ tag, title, tint, color, lightTitle = false }) {
   return (
     <div data-reveal="head" className="mx-auto mb-12 max-w-2xl text-center">
       {tag && (
@@ -103,7 +125,11 @@ function SectionHead({ tag, title, tint, color }) {
           {tag}
         </span>
       )}
-      <h2 className="mt-4 font-['Sora','Alexandria'] text-3xl font-extrabold text-[#2b3447] md:text-4xl">
+      <h2
+        className={`mt-4 font-['Sora','Alexandria'] text-3xl font-extrabold md:text-4xl ${
+          lightTitle ? "text-white" : "text-[#2b3447]"
+        }`}
+      >
         {title}
       </h2>
     </div>
@@ -156,11 +182,10 @@ export default function AboutUs({ onOpenPlacementQuiz }) {
         ease: ANIM.ease,
       });
 
-      gsap.from("[data-hero-img]", {
+      gsap.from("[data-hero-media]", {
         y: 36,
         opacity: 0,
         duration: 0.8,
-        stagger: 0.15,
         ease: ANIM.ease,
       });
 
@@ -356,89 +381,118 @@ export default function AboutUs({ onOpenPlacementQuiz }) {
     <div ref={pageRef}>
       <main
         dir="rtl"
-        className="overflow-hidden bg-[#F5BD35] font-['Alexandria',sans-serif] text-[#596683]"
+        className="relative overflow-x-clip bg-gradient-to-bl from-[#F5BD35] via-[#f7c548] to-[#eab024] font-['Alexandria',sans-serif] text-[#596683]"
       >
-        <section className="relative px-5 pb-20 pt-36 md:pt-44">
-          <div className="pointer-events-none absolute -top-20 start-[-6rem] h-72 w-72 rounded-full bg-[#F5BD35] blur-3xl" />
-          <div className="pointer-events-none absolute bottom-0 end-[-5rem] h-72 w-72 rounded-full bg-[#7957C8]/20 blur-3xl" />
+        <div className="pointer-events-none absolute -top-24 -right-24 h-80 w-80 rounded-full bg-white/25 blur-3xl" />
+        <div className="pointer-events-none absolute top-1/3 -left-24 h-96 w-96 rounded-full bg-[#1E293B]/10 blur-3xl" />
+        <div className="pointer-events-none absolute bottom-24 -right-20 h-80 w-80 rounded-full bg-white/20 blur-3xl" />
+        <div
+          className="pointer-events-none absolute inset-0 opacity-20"
+          style={{
+            backgroundImage:
+              "radial-gradient(#1E293B 1px, transparent 1px)",
+            backgroundSize: "24px 24px",
+          }}
+        />
 
-          <div className="relative mx-auto grid max-w-6xl items-center gap-12 md:grid-cols-2">
+        {/* Hero */}
+        <section className="relative z-10 px-5 pb-24 pt-24 md:pb-28 md:pt-28">
+          <div className="relative mx-auto grid max-w-6xl items-center gap-8 md:grid-cols-2 md:gap-10">
             <div>
               <span
                 data-hero-text
-                className="inline-block rounded-full bg-[#FFF5D9] px-4 py-1.5 text-sm font-bold text-[#b98507]"
+                className="inline-block rounded-full bg-[#FFF5D9] px-4 py-1 text-xs font-bold text-[#b98507]"
               >
                 Bee Academy
               </span>
               <h1
                 data-hero-text
-                className="mt-5 text-4xl font-extrabold md:text-5xl"
+                className="mt-4 text-3xl font-extrabold leading-tight md:text-5xl"
               >
                 نحوّل الطفل من مستخدم للتكنولوجيا إلى{" "}
                 <span className="text-white">صانع</span> لها
               </h1>
               <p
                 data-hero-text
-                className="mt-6 max-w-xl leading-9 text-[#596683]"
+                className="mt-4 max-w-xl text-sm leading-8 text-[#596683] md:text-base md:leading-8"
               >
                 أكاديمية لتعليم البرمجة والروبوتات والإلكترونيات والذكاء
                 الاصطناعي للأطفال والناشئين. نؤمن بالتعلم بالتجربة، فكل طفل
                 عندنا ينفذ مشروعه بنفسه ويخرج بشيء حقيقي صنعه بيده.
               </p>
-              <div data-hero-text className="mt-8 flex flex-wrap gap-3">
+              <div data-hero-text className="mt-6 flex flex-wrap gap-3">
                 <a
                   href={Whatsapp}
-                  className="rounded-full bg-[#596683] px-7 py-3 font-bold text-[#F5BD35] shadow-lg shadow-[#F47B35]/30 transition hover:-translate-y-0.5 hover:bg-[#F1EBFA]"
+                  className="rounded-full bg-[#596683] px-6 py-2.5 text-sm font-bold text-[#F5BD35] shadow-lg shadow-[#F47B35]/30 transition hover:-translate-y-0.5 hover:bg-[#F1EBFA]"
                 >
                   تواصل معنا على واتساب
                 </a>
                 <a
                   href="#faq"
-                  className="rounded-full bg-[#596683] px-7 py-3 font-bold text-[#F5BD35] ring-1 ring-[#596683]/20 transition hover:bg-[#F1EBFA]"
+                  className="rounded-full bg-[#596683] px-6 py-2.5 text-sm font-bold text-[#F5BD35] ring-1 ring-[#596683]/20 transition hover:bg-[#F1EBFA]"
                 >
                   الأسئلة الشائعة
                 </a>
               </div>
             </div>
 
-            <div className="relative mx-auto flex max-w-md gap-4">
-              <img
-                data-hero-img
-                src={about1}
-                alt="طلاب Bee Academy مع شهادات المشاركة"
-                className="mt-10 h-80 w-1/2 rotate-[-3deg] rounded-[2rem] object-cover shadow-xl ring-4 ring-white md:h-96"
-              />
-              <img
-                data-hero-img
-                src={about2}
-                alt="طلاب Bee Academy في مسابقة تقنية"
-                className="h-80 w-1/2 rotate-[3deg] rounded-[2rem] object-cover shadow-xl ring-4 ring-white md:h-96"
-              />
+            {/* بطاقة فيديو طولية مكان الصورتين */}
+            <div
+              data-hero-media
+              className="relative mx-auto w-full max-w-[270px] sm:max-w-[300px]"
+            >
+              <div className="overflow-hidden rounded-[2rem] bg-[#1E293B] p-2 shadow-2xl ring-4 ring-white">
+                <div className="relative aspect-[9/16] w-full overflow-hidden rounded-[1.5rem] bg-[#1E293B]">
+                  <video
+                    src={thevideo}
+                    controls
+                    playsInline
+                    preload="metadata"
+                    className="h-full w-full object-contain"
+                  />
+                </div>
+                <div className="flex items-center justify-between gap-2 px-3 pt-2.5 pb-1 text-white">
+                  <div className="flex items-center gap-2">
+                    <span className="h-2.5 w-2.5 rounded-full bg-[#F5BD35]" />
+                    <span className="text-xs font-bold">
+                      جولة داخل Bee Academy
+                    </span>
+                  </div>
+                  <span className="rounded-full bg-[#F5BD35]/20 px-2.5 py-0.5 text-[10px] font-bold text-[#F5BD35]">
+                    تعلم بالتجربة
+                  </span>
+                </div>
+              </div>
             </div>
           </div>
 
           {/* Number */}
           <div
             data-stats-grid
-            className="relative mx-auto mt-20 grid max-w-6xl grid-cols-2 gap-4 md:grid-cols-3"
+            className="relative mx-auto mt-12 grid max-w-6xl grid-cols-2 gap-4 md:mt-14 md:grid-cols-3"
           >
             {num.map((s) => (
               <div
                 key={s.disc}
                 data-stat
-                className="rounded-3xl bg-white p-6 text-center shadow-sm ring-1 ring-black/5"
+                className="rounded-3xl bg-white p-5 text-center shadow-sm ring-1 ring-black/5 md:p-6"
               >
-                <div className="font-['Sora'] text-4xl font-extrabold text-[#596683]">
+                <div className="font-['Sora'] text-3xl font-extrabold text-[#596683] md:text-4xl">
                   {s.n}
                 </div>
-                <div className="mt-2 text-sm text-[#596683]">{s.disc}</div>
+                <div className="mt-1.5 text-sm text-[#596683]">{s.disc}</div>
               </div>
             ))}
           </div>
+
+          <WaveDivider fill="#FFFFFF" />
         </section>
 
-        {/* story*/}
-        <section data-story-section className="bg-white px-5 py-20">
+        {/* story */}
+        <section
+          data-story-section
+          className="relative z-10 bg-white px-5 pb-28 pt-20"
+        >
           <div className="mx-auto max-w-6xl">
             <SectionHead title="بدأت بفكرة وثقة أولياء أمور" />
 
@@ -468,14 +522,17 @@ export default function AboutUs({ onOpenPlacementQuiz }) {
               />
             </div>
           </div>
+
+          <WaveDivider fill="#f7c548" flip />
         </section>
 
-        <section className="px-5 py-20">
+        {/* Vision & Mission */}
+        <section className="relative z-10 px-5 pb-28 pt-20">
           <div
             data-vision-grid
             className="mx-auto grid max-w-6xl gap-6 md:grid-cols-2"
           >
-            <div data-vision-card className="rounded-[2rem]  bg-[#EAF3FC] p-8">
+            <div data-vision-card className="rounded-[2rem] bg-[#EAF3FC] p-8">
               <div className="text-4xl">🔭</div>
               <h3 className="mt-4 text-2xl font-extrabold text-[#596683]">
                 رؤيتنا
@@ -485,7 +542,7 @@ export default function AboutUs({ onOpenPlacementQuiz }) {
                 فيه، لا مجرد شاشة يستخدمها.
               </p>
             </div>
-            <div data-vision-card className="rounded-[2rem]  bg-[#FFF5D9] p-8">
+            <div data-vision-card className="rounded-[2rem] bg-[#FFF5D9] p-8">
               <div className="text-4xl">🎯</div>
               <h3 className="mt-4 text-2xl font-extrabold text-[#b98507]">
                 رسالتنا
@@ -496,10 +553,12 @@ export default function AboutUs({ onOpenPlacementQuiz }) {
               </p>
             </div>
           </div>
+
+          <WaveDivider fill="#FFFFFF" />
         </section>
 
         {/* goals */}
-        <section className="bg-white px-4 py-24 md:px-8">
+        <section className="relative z-10 bg-white px-4 pb-28 pt-24 md:px-8">
           <div className="mx-auto max-w-7xl">
             <SectionHead tag="أهدافنا" title="ماذا نريد أن نحققه مع كل طفل؟" />
 
@@ -526,10 +585,12 @@ export default function AboutUs({ onOpenPlacementQuiz }) {
               ))}
             </div>
           </div>
+
+          <WaveDivider fill="#f7c548" flip />
         </section>
 
         {/* ───── القيم ───── */}
-        <section className="px-5 py-20">
+        <section className="relative z-10 px-5 pb-28 pt-20">
           <div className="mx-auto max-w-6xl">
             <SectionHead title="ما نؤمن به" />
             <div
@@ -543,7 +604,7 @@ export default function AboutUs({ onOpenPlacementQuiz }) {
                   className="rounded-3xl p-6 text-center transition-transform border-3 border-[#596683] duration-200 hover:-translate-y-1"
                   style={{ background: value.bg }}
                 >
-                  <div className="text-4xl ">{value.icon}</div>
+                  <div className="text-4xl">{value.icon}</div>
                   <h3 className="mt-3 font-bold text-[#596683]">{value.t}</h3>
                   <div
                     className="mx-auto mt-3 h-1 w-10 rounded-full"
@@ -553,12 +614,14 @@ export default function AboutUs({ onOpenPlacementQuiz }) {
               ))}
             </div>
           </div>
+
+          <WaveDivider fill="#596683" />
         </section>
 
         {/* ───── فريق التدريب ───── */}
-        <section className="bg-[#596683] px-5 py-20 text-white">
-          <div className="mx-auto max-w-6xl ">
-            <SectionHead title="المدربون" />
+        <section className="relative z-10 bg-[#596683] px-5 pb-28 pt-20 text-white">
+          <div className="mx-auto max-w-6xl">
+            <SectionHead title="المدربون" lightTitle />
             <div
               data-team-grid
               className="grid grid-cols-2 gap-5 md:grid-cols-4"
@@ -579,10 +642,15 @@ export default function AboutUs({ onOpenPlacementQuiz }) {
               ))}
             </div>
           </div>
+
+          <WaveDivider fill="#FFFFFF" flip />
         </section>
 
         {/* Question */}
-        <section id="faq" className="bg-white px-5 py-20">
+        <section
+          id="faq"
+          className="relative z-10 bg-white px-5 pb-28 pt-20"
+        >
           <div className="mx-auto max-w-3xl">
             <SectionHead tag="FAQ" title="الأسئلة الأكثر شيوعاً" />
             <div className="space-y-3">
@@ -597,9 +665,12 @@ export default function AboutUs({ onOpenPlacementQuiz }) {
               ))}
             </div>
           </div>
+
+          <WaveDivider fill="#f7c548" />
         </section>
 
-        <section className="px-5 py-20">
+        {/* CTA */}
+        <section className="relative z-10 px-5 py-20">
           <div
             data-cta
             className="mx-auto max-w-5xl rounded-[2.5rem] bg-gradient-to-br from-[#596683] to-[#596683] p-10 text-center text-white md:p-14"

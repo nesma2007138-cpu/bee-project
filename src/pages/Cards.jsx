@@ -8,6 +8,7 @@ import comp6 from "../assets/compition/comp6.jpg";
 import comp7 from "../assets/compition/comp7.jpeg";
 import comp8 from "../assets/compition/comp8.jpeg";
 import comp9 from "../assets/compition/comp9.jpeg";
+import RevealOnScroll from "../components/RevealOnScroll";
 
 const competitionCards = [
   {
@@ -18,7 +19,7 @@ const competitionCards = [
     accent: "#0b466b",
   },
   {
-    id: 2, 
+    id: 2,
     image: comp2,
     title: "Galactic Team Members",
     tag: "Certificates & Awards",
@@ -84,7 +85,7 @@ export default function Cards() {
   const handleNext = (e) => {
     e?.stopPropagation();
     setSelectedIndex((prev) =>
-      prev === null ? 0 : (prev + 1) % competitionCards.length,
+      prev === null ? 0 : (prev + 1) % competitionCards.length
     );
   };
 
@@ -93,7 +94,7 @@ export default function Cards() {
     setSelectedIndex((prev) =>
       prev === null
         ? 0
-        : (prev - 1 + competitionCards.length) % competitionCards.length,
+        : (prev - 1 + competitionCards.length) % competitionCards.length
     );
   };
 
@@ -105,13 +106,13 @@ export default function Cards() {
         setSelectedIndex(null);
       } else if (e.key === "ArrowRight") {
         setSelectedIndex((prev) =>
-          prev === null ? 0 : (prev + 1) % competitionCards.length,
+          prev === null ? 0 : (prev + 1) % competitionCards.length
         );
       } else if (e.key === "ArrowLeft") {
         setSelectedIndex((prev) =>
           prev === null
             ? 0
-            : (prev - 1 + competitionCards.length) % competitionCards.length,
+            : (prev - 1 + competitionCards.length) % competitionCards.length
         );
       }
     };
@@ -125,69 +126,73 @@ export default function Cards() {
       dir="rtl"
       className="w-full bg-gradient-to-b from-slate-50 to-indigo-50/70 px-4 py-16 sm:px-6"
     >
-      <div className="mx-auto mb-10 max-w-6xl text-center">
+      <RevealOnScroll y={18} className="mx-auto mb-10 max-w-6xl text-center">
         <span className="mb-2.5 inline-block rounded-full bg-[#0b466b]/10 px-3.5 py-1 text-xs font-bold text-[#0b466b]">
           معرض البطولات
         </span>
         <h2 className="mb-2 text-2xl font-extrabold text-slate-900 sm:text-4xl">
           لحظات المسابقات والبطولات
         </h2>
-       
-      </div>
+      </RevealOnScroll>
 
       <div className="mx-auto grid max-w-6xl grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
         {competitionCards.map((card, index) => (
-          <article
+          <RevealOnScroll
             key={card.id}
-            style={{ "--card-accent": card.accent }}
-            onClick={() => setSelectedIndex(index)}
-            className="group flex cursor-pointer flex-col overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-md transition-all duration-300 hover:-translate-y-1.5 hover:border-[var(--card-accent)] hover:shadow-xl"
+            delay={Math.min(index * 0.06, 0.36)}
+            y={22}
           >
-            <div
-              className="h-1 w-full"
-              style={{ backgroundColor: "var(--card-accent)" }}
-            />
-
-            <div className="relative aspect-[4/3] w-full overflow-hidden bg-slate-200">
-              <img
-                src={card.image}
-                alt={card.title}
-                loading="lazy"
-                className="h-full w-full object-cover object-top transition-transform duration-500 group-hover:scale-105"
-              />
-              <span
+            <article
+              style={{ "--card-accent": card.accent }}
+              onClick={() => setSelectedIndex(index)}
+              className="group flex h-full cursor-pointer flex-col overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-md transition-all duration-300 hover:-translate-y-1.5 hover:border-[var(--card-accent)] hover:shadow-xl"
+            >
+              <div
+                className="h-1 w-full"
                 style={{ backgroundColor: "var(--card-accent)" }}
-                className="absolute top-3 right-3 rounded-full px-3 py-1 text-xs font-bold text-white shadow"
-              >
-                {card.tag}
-              </span>
-            </div>
+              />
 
-            <div className="flex items-center justify-between gap-3 bg-white p-4">
-              <div>
+              <div className="relative aspect-[4/3] w-full overflow-hidden bg-slate-200">
+                <img
+                  src={card.image}
+                  alt={card.title}
+                  loading="lazy"
+                  className="h-full w-full object-cover object-top transition-transform duration-500 group-hover:scale-105"
+                />
                 <span
-                  style={{ color: "var(--card-accent)" }}
-                  className="block text-xs font-bold"
+                  style={{ backgroundColor: "var(--card-accent)" }}
+                  className="absolute top-3 right-3 rounded-full px-3 py-1 text-xs font-bold text-white shadow"
                 >
-                  0{card.id}
+                  {card.tag}
                 </span>
-                <h3 className="text-base font-bold text-slate-900">
-                  {card.title}
-                </h3>
               </div>
 
-              <span
-                style={{
-                  color: "var(--card-accent)",
-                  backgroundColor:
-                    "color-mix(in srgb, var(--card-accent) 12%, white)",
-                }}
-                className="shrink-0 rounded-lg px-3 py-1.5 text-xs font-bold transition-colors duration-200 group-hover:bg-[var(--card-accent)] group-hover:text-white"
-              >
-                عرض ←
-              </span>
-            </div>
-          </article>
+              <div className="flex items-center justify-between gap-3 bg-white p-4">
+                <div>
+                  <span
+                    style={{ color: "var(--card-accent)" }}
+                    className="block text-xs font-bold"
+                  >
+                    0{card.id}
+                  </span>
+                  <h3 className="text-base font-bold text-slate-900">
+                    {card.title}
+                  </h3>
+                </div>
+
+                <span
+                  style={{
+                    color: "var(--card-accent)",
+                    backgroundColor:
+                      "color-mix(in srgb, var(--card-accent) 12%, white)",
+                  }}
+                  className="shrink-0 rounded-lg px-3 py-1.5 text-xs font-bold transition-colors duration-200 group-hover:bg-[var(--card-accent)] group-hover:text-white"
+                >
+                  عرض ←
+                </span>
+              </div>
+            </article>
+          </RevealOnScroll>
         ))}
       </div>
 

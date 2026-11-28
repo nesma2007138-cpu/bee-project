@@ -5,8 +5,24 @@ export default function Footer({ onNavigate }) {
   return (
     <footer
       id="main-footer"
-      className="bg-[#596683] text-white pt-14 pb-8 mt-16 border-t border-white/10 overflow-visible"
+      className="relative bg-[#596683] text-white pt-16 sm:pt-20 pb-8 overflow-visible"
     >
+      {/* موجة علوية تدمج الفوتر مع القسم السابق بسلاسة */}
+      <div className="pointer-events-none absolute -top-px inset-x-0 -translate-y-full leading-none overflow-hidden">
+        <svg
+          viewBox="0 0 1440 70"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+          className="block w-full h-8 sm:h-12"
+          preserveAspectRatio="none"
+        >
+          <path
+            d="M0 30C320 75 640 -15 960 30C1200 63 1360 45 1440 30V70H0V30Z"
+            fill="#596683"
+          />
+        </svg>
+      </div>
+
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 text-sm">
         {/* تعريف الأكاديمية + اللوجو محاذي مع بداية السطور من اليمين */}
         <div className="space-y-4 overflow-visible">
